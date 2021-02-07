@@ -1,0 +1,12 @@
+- hosts: databaseserver
+  become: true
+  become_user: root
+  tasks:
+  - name: nginx install
+    apt: "name=nginx state=present"
+  - name: clone the repo
+    git: "repo=https://sinhais@bitbucket.org/sinhais/mywebsite.git dest=mywebsite"
+  - name: copy file
+    copy: "src=/home/ansible/mywebsite/index.html dest=/var/www/html/index.html remote_src=yes"
+  - name: restart nginx
+    service: "name=nginx state=restarted"

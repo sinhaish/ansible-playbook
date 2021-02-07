@@ -1,0 +1,21 @@
+# List of plays
+# Play 1
+- hosts: webservers
+  become: True
+  become_user: root
+  #list of tasks
+  tasks:
+  #task 1
+  - name: Install nginx
+    apt: "name=nginx state=present"
+  #task 2
+  - name: Restart service
+    service: "name=nginx state=restarted"
+#Play 2
+- hosts: databaseserver
+  become: True
+  become_user: root
+  tasks:
+  #task 1
+  - name: Install sqlite
+    apt: "name=sqlite3 state=present"
